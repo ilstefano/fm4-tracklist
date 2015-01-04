@@ -157,7 +157,10 @@ if ($handle = opendir(INPUT_DIR)) {
 							
 							echo "\nNeuer Track: $id_track ($title, $interpret)";
 						}
-												
+						
+						$query = "update playtime set track=$id_track where id=$id_playtime";
+						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+						
 					}
 				}
 			}

@@ -1,0 +1,4 @@
+Hinzufügen Spalte 'track' in Tabelle 'fm4':
+
+mysql -u root fm4 -e 'alter table playtime add column (track bigint)'
+mysql -u root fm4 -e 'alter table  playtime change track track bigint not null'
