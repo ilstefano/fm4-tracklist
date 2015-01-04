@@ -3,11 +3,11 @@
 
 {% block content %}
 
-    <h1>{{ 'Doctrine'|trans }}</h1>
+    <h1>{{ 'Last FM4 Tracklist'|trans }}</h1>
 
     <ul>
-        {% for post in posts %}
-            <li>{{ post.title }}</li>
+        {% for track in tracks %}
+            <li>{{ track.zeit }}, {{ track.interpret}} : {{ track.title }}, Neu: {{ track.new}}</li>
         {% endfor %}
     </ul>
 

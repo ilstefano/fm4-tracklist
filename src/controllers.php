@@ -11,6 +11,8 @@ $app->match('/', function () use ($app) {
     $app['session']->getFlashBag()->add('success', 'Success flash message');
     $app['session']->getFlashBag()->add('error', 'Error flash message');
 
+    #return 'Soso.';
+
     return $app['twig']->render('index.html.twig');
 })->bind('homepage');
 
@@ -34,11 +36,16 @@ $app->match('/login', function (Request $request) use ($app) {
     ));
 })->bind('login');
 
+
+#$res = $app['db']->fetchAll('select * from playtime pt, track_playtime tpt, track t  where pt.id=tpt.id_playtime and t.id=tpt.id_track order by pt.id desc limit 10');
+#var_dump($res);
+
+
 $app->match('/doctrine', function () use ($app) {
     return $app['twig']->render(
         'doctrine.html.twig',
         array(
-            'posts' => $app['db']->fetchAll('SELECT * FROM post')
+            'tracks' => $app['db']->fetchAll('select * from playtime pt left join track t on (pt.track=t.id)  order by pt.id desc limit 30')
         )
     );
 })->bind('doctrine');
