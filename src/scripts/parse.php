@@ -118,8 +118,6 @@ if ($handle = opendir(INPUT_DIR)) {
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						$num_rows = mysql_num_rows($result);
-						
-						$new = 0;
 
 						if ($num_rows != 0)
 						{
@@ -144,7 +142,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track set title='$title', interpret='$interpret'";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 
-							# neue id zurückholen
+							# neue id zurÃ¼ckholen
 							$query = "select id from track where title='$title' and interpret='$interpret'";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 
@@ -158,11 +156,12 @@ if ($handle = opendir(INPUT_DIR)) {
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 							
 							echo "\nNeuer Track: $id_track ($title, $interpret, new=$new)";
-							
-							$new = 1;
 						}
 						
-						$query = "update playtime set track=$id_track, new='$new' where id=$id_playtime";
+						# Addendum, 03./04.01.2015:
+						# - von playtime direkt nach track joinen
+						# - in playtimne die aktuellen counts des tracls eintragen
+						$query = "update playtime set track=$id_track, count=$num_rows where id=$id_playtime";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
 					}

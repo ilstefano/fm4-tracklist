@@ -45,7 +45,7 @@ $app->match('/doctrine', function () use ($app) {
     return $app['twig']->render(
         'doctrine.html.twig',
         array(
-            'tracks' => $app['db']->fetchAll('select * from playtime pt left join track t on (pt.track=t.id)  order by pt.id desc limit 30')
+            'tracks' => $app['db']->fetchAll('select * from playtime pt left join track t on (pt.track=t.id)  order by pt.id desc limit 50')
         )
     );
 })->bind('doctrine');

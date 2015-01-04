@@ -8,3 +8,7 @@ Hinzufügen Spalte 'new' in Tabelle 'playtime':
 mysql -u root fm4 -e 'alter table playtime add column (new char(1) not null default "0")'
 mysql -u root fm4 -e 'alter table playtime change new new char(1) default "0"'
 mysql -u root fm4 -e 'desc playtime'
+
+Spalte 'new' nach 'count' umwandeln:
+====================================
+mysql -u root fm4 -e 'alter table playtime change new count int default NULL'
