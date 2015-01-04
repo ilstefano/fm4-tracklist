@@ -130,7 +130,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
-							echo "\nBekannter Track: $id_track ($title, $interpret, new=$new)";
+							echo "\nBekannter Track: $id_track ($title, $interpret, count=$num_rows)";
 
 						}
 						else
@@ -155,7 +155,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 							
-							echo "\nNeuer Track: $id_track ($title, $interpret, new=$new)";
+							echo "\nNeuer Track: $id_track ($title, $interpret, count=$num_rows)";
 						}
 						
 						# Addendum, 03./04.01.2015:

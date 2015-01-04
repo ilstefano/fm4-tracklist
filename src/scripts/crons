@@ -1,0 +1,38 @@
+
+
+
+b33:/home/stl/dev/fm4 # cat /etc/cron.d/fm4-cron 
+MAILTO=""
+*/3 * * * *    stl      /home/stl/fm4/trackservice/fm4-trackservic
+
+stl@b33:~> cd fm4/trackservice/
+stl@b33:~/fm4/trackservice> l
+insgesamt 866116
+drwxr-xr-x 2 stl users      4096  4. Jan 23:27 ./
+drwxr-xr-x 4 stl users      4096  4. Jan 21:00 ../
+-rw-r--r-- 1 stl users       460  4. Jan 23:27 fm4log
+-rwxr--r-- 1 stl users       201 30. Mär 2010  fm4-trackservice*
+-rw-r--r-- 1 stl users    894590  4. Jan 23:27 parse.out
+-rw-r--r-- 1 stl users 885092922  4. Jan 00:42 parse.out-0
+stl@b33:~/fm4/trackservice> cat fm4-trackservice 
+#!/bin/bash
+
+cd /home/stl/fm4/trackservice
+/usr/bin/wget http://fm4.orf.at/trackservicepopup/main -o /home/stl/fm4/trackservice/fm4log
+cd ..
+./parse.php >> trackservice/parse.out
+rm trackservice/main*
+stl@b33:~/fm4/trackservice> 
+
+NEU: (mit bezug auf silex-fm4)
+
+
+stl@b33:~/fm4/trackservice> cat fm4-trackservice 
+#!/bin/bash
+
+cd /home/stl/fm4/trackservice
+/usr/bin/wget http://fm4.orf.at/trackservicepopup/main -o /home/stl/fm4/trackservice/fm4log
+cd ..
+/home/stl/dev/fm4/src/scripts/parse.php >> trackservice/parse.out
+rm trackservice/main*
+stl@b33:~/fm4/trackservice> 
