@@ -1,4 +1,10 @@
-Hinzufügen Spalte 'track' in Tabelle 'fm4':
-
+Hinzufügen Spalte 'track' in Tabelle 'playtime':
+================================================
 mysql -u root fm4 -e 'alter table playtime add column (track bigint)'
 mysql -u root fm4 -e 'alter table  playtime change track track bigint not null'
+
+Hinzufügen Spalte 'new' in Tabelle 'playtime':
+==============================================
+mysql -u root fm4 -e 'alter table playtime add column (new char(1) not null default "0")'
+mysql -u root fm4 -e 'alter table playtime change new new char(1) default "0"'
+mysql -u root fm4 -e 'desc playtime'

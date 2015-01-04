@@ -118,6 +118,8 @@ if ($handle = opendir(INPUT_DIR)) {
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						$num_rows = mysql_num_rows($result);
+						
+						$new = 0;
 
 						if ($num_rows != 0)
 						{
@@ -130,7 +132,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
-							echo "\nBekannter Track: $id_track ($title, $interpret)";
+							echo "\nBekannter Track: $id_track ($title, $interpret, new=$new)";
 
 						}
 						else
@@ -142,7 +144,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track set title='$title', interpret='$interpret'";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 
-							# neue id zurï¿½ckholen
+							# neue id zurückholen
 							$query = "select id from track where title='$title' and interpret='$interpret'";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 
@@ -155,10 +157,12 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 							
-							echo "\nNeuer Track: $id_track ($title, $interpret)";
+							echo "\nNeuer Track: $id_track ($title, $interpret, new=$new)";
+							
+							$new = 1;
 						}
 						
-						$query = "update playtime set track=$id_track where id=$id_playtime";
+						$query = "update playtime set track=$id_track, new='$new' where id=$id_playtime";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
 					}
