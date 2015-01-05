@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% set active = '' %}
+
+{% block content %}
+
+    <h1>{{ 'Track'|trans }} {{track}}</h1>
+
+    <ul>
+        {% for play in playlist %}
+            <li>{{ play.zeit }} </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

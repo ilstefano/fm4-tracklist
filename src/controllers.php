@@ -5,6 +5,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
+
+$app->get('/track', 'FM4\Controller\TrackController::indexAction')
+->bind('track');
+
+$app->get('/track/{track}', 'FM4\Controller\TrackController::showTrackAction');
+
+
 $app->match('/', function () use ($app) {
     $app['session']->getFlashBag()->add('warning', 'Warning flash message');
     $app['session']->getFlashBag()->add('info', 'Info flash message');

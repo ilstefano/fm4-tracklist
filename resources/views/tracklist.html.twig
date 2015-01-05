@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% set active = 'track' %}
+
+{% block content %}
+
+    <h1>{{ 'Last FM4 Tracklist'|trans }}</h1>
+
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track.zeit }} | {{ track.interpret}} --- <a href="{{ path('track') }}/{{ track.track }}">{{ track.title }} </a>| Count: {{ track.count }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

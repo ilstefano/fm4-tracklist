@@ -43,7 +43,8 @@
     },
     "autoload": {
         "psr-0": {
-            "SKE": "src/"
+            "SKE": "src/",
+            "FM4": "src/"
         }
     }
 }
