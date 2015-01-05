@@ -22,3 +22,9 @@ tabelle track: interpret und title trimmen
 ===========================================
 mysql -u root fm4 -e 'update track set interpret=trim(interpret)'
 mysql -u root fm4 -e 'update track set title=trim(title)'
+
+
+tabelle track: interpret und title trimmen
+===========================================
+mysql -u root fm4 -e 'UPDATE track SET interpret = REPLACE(interpret, "&amp;", "&")'
+mysql -u root fm4 -e 'UPDATE track SET title = REPLACE(title, "&amp;", "&")'

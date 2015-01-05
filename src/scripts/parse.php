@@ -106,14 +106,14 @@ if ($handle = opendir(INPUT_DIR)) {
 						$line = mysql_fetch_array($result, MYSQL_ASSOC);
 						$id_playtime = $line["id"];
 
-						echo "\nNeue Playtime: $dateTimeStr // $id_playtime";
+						echo "\nNeue Playtime: $dateTimeStr, Id: $id_playtime";
 
 						#
 						# track suchen
 						#
 
-						$title = mysql_escape_string ( trim ( $matches[2][$i] ));
-						$interpret = mysql_escape_string ( trim ( $matches[3][$i] ));
+						$title = mysql_escape_string ( htmlspecialchars_decode ( trim ( $matches[2][$i] )));
+						$interpret = mysql_escape_string ( htmlspecialchars_decode ( trim ( $matches[3][$i] )));
 
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
@@ -130,7 +130,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
-							echo "\nBekannter Track: $id_track ($title, $interpret)";
+							$status = 'Bekannter';
 
 						}
 						else
@@ -155,9 +155,10 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 							
-							echo "\nNeuer Track: $id_track ($title, $interpret)";
+							$status = 'Neuer';
 						}
 						
+					
 						# Addendum, 03./04./05.01.2015:
 
 						# bisherige anzahl an spielzeiten feststellen
@@ -170,7 +171,8 @@ if ($handle = opendir(INPUT_DIR)) {
 						# - in playtimne die aktuellen counts des tracks eintragen
 						$query = "update playtime set track=$id_track, count=$count where id=$id_playtime";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
-																							
+												
+						echo "\n$status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count)";
 					}
 				}
 			}
