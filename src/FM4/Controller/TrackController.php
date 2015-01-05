@@ -24,8 +24,15 @@ class TrackController
     	
     	#return $template->execute();    	
     	
+    	$select = 'select
+    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, count, track
+    				from playtime pt
+    				left join track t on (pt.track=t.id)
+    				order by pt.id desc
+    				limit 50';
+    	
         $data = array(
-        	'tracks' => $app['db']->fetchAll('select * from playtime pt left join track t on (pt.track=t.id)  order by pt.id desc limit 50')
+        	'tracks' => $app['db']->fetchAll($select)
         );
         return $app['twig']->render('tracklist.html.twig', $data);
     }

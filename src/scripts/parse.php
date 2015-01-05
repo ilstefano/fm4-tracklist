@@ -130,7 +130,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
-							echo "\nBekannter Track: $id_track ($title, $interpret, count=$num_rows)";
+							echo "\nBekannter Track: $id_track ($title, $interpret)";
 
 						}
 						else
@@ -155,15 +155,22 @@ if ($handle = opendir(INPUT_DIR)) {
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 							
-							echo "\nNeuer Track: $id_track ($title, $interpret, count=$num_rows)";
+							echo "\nNeuer Track: $id_track ($title, $interpret)";
 						}
 						
-						# Addendum, 03./04.01.2015:
+						# Addendum, 03./04./05.01.2015:
+
+						# bisherige anzahl an spielzeiten feststellen
+						$query = "select count(*) as count from track_playtime where id_track=$id_track";
+						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());						
+						$line = mysql_fetch_array($result, MYSQL_ASSOC);	
+						$count = $line['count'];
+
 						# - von playtime direkt nach track joinen
-						# - in playtimne die aktuellen counts des tracls eintragen
-						$query = "update playtime set track=$id_track, count=$num_rows where id=$id_playtime";
+						# - in playtimne die aktuellen counts des tracks eintragen
+						$query = "update playtime set track=$id_track, count=$count where id=$id_playtime";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
-						
+																							
 					}
 				}
 			}
