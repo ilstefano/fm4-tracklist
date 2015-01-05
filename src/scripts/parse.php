@@ -112,8 +112,8 @@ if ($handle = opendir(INPUT_DIR)) {
 						# track suchen
 						#
 
-						$title = mysql_escape_string ( htmlspecialchars_decode ( trim ( $matches[2][$i] )));
-						$interpret = mysql_escape_string ( htmlspecialchars_decode ( trim ( $matches[3][$i] )));
+						$title = mysql_escape_string (  html_entity_decode ( trim ( $matches[2][$i] )));
+						$interpret = mysql_escape_string (  html_entity_decode ( trim ( $matches[3][$i] )));
 
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
@@ -172,7 +172,7 @@ if ($handle = opendir(INPUT_DIR)) {
 						$query = "update playtime set track=$id_track, count=$count where id=$id_playtime";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 												
-						echo "\n$status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count)";
+						echo "\n$status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";
 					}
 				}
 			}

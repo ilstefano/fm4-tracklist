@@ -28,3 +28,22 @@ tabelle track: replace &amp; in interpret und title
 ===================================================
 mysql -u root fm4 -e 'UPDATE track SET interpret = REPLACE(interpret, "&amp;", "&")'
 mysql -u root fm4 -e 'UPDATE track SET title = REPLACE(title, "&amp;", "&")'
+
+
+Todos in der datenbank:
+=======================
+1) Umlaute (vgl. interpret = 'Sterne' --- mysql -u root fm4 -e 'select * from track where interpret rlike "Sterne"'
+2) 'Fm4' interpret <-> title vertauschen beim parsen
+
+
+ 1019  mysql -u root fm4 -e 'SELECT * FROM track WHERE NOT HEX(title) REGEXP '^([0-7][0-9A-F])*$';
+ 1020  mysql -u root fm4 -e 'SELECT * FROM track WHERE NOT HEX(title) REGEXP "^([0-7][0-9A-F])*$"';
+ 1021  mysql -u root fm4 -e 'SELECT * FROM track WHERE NOT HEX(interpret) REGEXP "^([0-7][0-9A-F])*$"';
+ 1022  mysql -u root fm4 -e 'SELECT * FROM track WHERE NOT HEX(interpret) REGEXP "^([0-7][0-9A-F])*$" order by interpret';
+ 1023  mysql -u root fm4 -e 'SELECT *, hex(interpret) FROM track WHERE NOT HEX(interpret) REGEXP "^([0-7][0-9A-F])*$" where id=13874 order by interpret';
+ 1024  mysql -u root fm4 -e 'SELECT *, hex(interpret) FROM track WHERE NOT HEX(interpret) REGEXP "^([0-7][0-9A-F])*$" and id=13874 order by interpret';
+ 1025  mysql -u root fm4 -e 'SELECT * FROM track WHERE HEX(interpret) rlike "c3b6" order by interpret';
+ 1026  mysql -u root fm4 -e 'SELECT * FROM track WHERE HEX(interpret) rlike "c3a4" order by interpret';
+ 1027  mysql -u root fm4 -e 'SELECT * FROM track WHERE HEX(interpret) rlike "c3bc" order by interpret';
+ 1028  mysql -u root fm4 -e 'SELECT * FROM track WHERE interpret rlike "ü" order by interpret';
+ 1029  mysql -u root fm4 -e 'SELECT *, hex(interpret) FROM track WHERE interpret rlike "ü" order by interpret';
