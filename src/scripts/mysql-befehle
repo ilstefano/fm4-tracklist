@@ -1,7 +1,10 @@
+
+
 Hinzufügen Spalte 'track' in Tabelle 'playtime':
 ================================================
 mysql -u root fm4 -e 'alter table playtime add column (track bigint)'
 mysql -u root fm4 -e 'alter table  playtime change track track bigint not null'
+
 
 Hinzufügen Spalte 'new' in Tabelle 'playtime':
 ==============================================
@@ -9,6 +12,13 @@ mysql -u root fm4 -e 'alter table playtime add column (new char(1) not null defa
 mysql -u root fm4 -e 'alter table playtime change new new char(1) default "0"'
 mysql -u root fm4 -e 'desc playtime'
 
+
 Spalte 'new' nach 'count' umwandeln:
 ====================================
 mysql -u root fm4 -e 'alter table playtime change new count int default NULL'
+
+
+tabelle track: interpret und title trimmen
+===========================================
+mysql -u root fm4 -e 'update track set interpret=trim(interpret)'
+mysql -u root fm4 -e 'update track set title=trim(title)'

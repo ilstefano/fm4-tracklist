@@ -112,8 +112,8 @@ if ($handle = opendir(INPUT_DIR)) {
 						# track suchen
 						#
 
-						$title = mysql_escape_string($matches[2][$i]);
-						$interpret = mysql_escape_string($matches[3][$i]);
+						$title = mysql_escape_string ( trim ( $matches[2][$i] ));
+						$interpret = mysql_escape_string ( trim ( $matches[3][$i] ));
 
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
