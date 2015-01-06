@@ -43,12 +43,12 @@ class ReportController
     	
     	
     	$select = 'select
-    			count(*) as count, t.interpret, t.title
+    			count(*) as count, track, t.interpret, t.title
     			from playtime
     			left join track t on (track=t.id)
     			group by track
-    			having count > ' . $varianz .'
-    			order by count desc';
+    			order by count desc
+    			limit 30';
     	
         $data = array(
         	'tracks' => $app['db']->fetchAll($select),

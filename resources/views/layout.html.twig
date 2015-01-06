@@ -30,8 +30,8 @@
                     <ul class="nav">
                         <li {% if 'homepage' == active %}class="active"{% endif %}><a href="{{ path('homepage') }}">{{ 'Homepage'|trans }}</a></li>
                         <li {% if 'track' == active %}class="active"{% endif %}><a href="{{ path('track') }}">Tracks</a></li>
-                        <li {% if 'page_with_cache' == active %}class="active"{% endif %}><a href="{{ path('page_with_cache') }}">{{ 'Cache sample'|trans }}</a></li>
-                        <li {% if 'form' == active %}class="active"{% endif %}><a href="{{ path('form') }}">{{ 'Form sample'|trans }} </a></li>
+                   <!-- <li {% if 'page_with_cache' == active %}class="active"{% endif %}><a href="{{ path('page_with_cache') }}">{{ 'Cache sample'|trans }}</a></li> -->
+                   <!-- <li {% if 'form' == active %}class="active"{% endif %}><a href="{{ path('form') }}">{{ 'Form sample'|trans }} </a></li> -->
                         <li {% if 'report' == active %}class="active"{% endif %}><a href="{{ path('report') }}">{{ 'Report'|trans}}</a></li>
                         <li class="dropdown{% if 'account' == active %} active{% endif %}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

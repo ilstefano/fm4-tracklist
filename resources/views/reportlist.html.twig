@@ -3,13 +3,12 @@
 
 {% block content %}
 
-    <h1>{{ 'FM4 most often played track list'|trans }}</h1>
-    
-    <h2>Max = {{max}}, Varianz = {{varianz}}(Schwelle = {{schwelle*100}}%)</h2>
+    <h1>{{ 'FM4 TOP 30'|trans }}</h1>
+
 
     <ul>
         {% for track in tracks %}
-            <li>{{ track.interpret}} --- {{ track.title }} | Count: {{ track.count }}</li>
+            <li>{{ track.interpret}} --- <a href="{{ path('track') }}/{{ track.track }}?all=1">{{ track.title }}</a> | Count: {{ track.count }}</li>
         {% endfor %}
     </ul>
 

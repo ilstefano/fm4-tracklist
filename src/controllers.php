@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 $app->get('/track', 'FM4\Controller\TrackController::indexAction')
 ->bind('track');
 
-$app->get('/track/{track}', 'FM4\Controller\TrackController::showTrackPlaylistAction');
+$app->get('/track/{id_track}', 'FM4\Controller\TrackController::showTrackPlaylistAction');
 
 $app->get('/report', 'FM4\Controller\ReportController::indexAction')
 ->bind('report');

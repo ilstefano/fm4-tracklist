@@ -29,12 +29,13 @@ class TrackController
     	
     	#return $template->execute();    	
     	
+    	$limit_str = ' limit 50';  
+    	
     	$select = 'select
     				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, count, track
     				from playtime pt
     				left join track t on (pt.track=t.id)
-    				order by pt.id desc
-    				limit 50';
+    				order by pt.id desc' . $limit_str;
     	
         $data = array(
         	'tracks' => $app['db']->fetchAll($select)
@@ -45,21 +46,36 @@ class TrackController
     // ==================================================================================================================
      
     
-    public function showTrackPlaylistAction(Request $request, Application $app, $track)
+    public function showTrackPlaylistAction(Request $request, Application $app, $id_track)
     {
      
-    	$select = "SELECT 
-    				DATE_FORMAT(zeit, '%d.%m.%Y %Hh%i') as zeit, id
+    	$limit_str = ' limit 50';
+    	
+    	$limit_req = $request->query->get('all', 0);
+    	if ($limit_req)
+    		$limit_str = '';
+    	
+    	$select = 'select
+    				title, interpret
+    				from track
+    				where id=' . $id_track;
+    	
+    	$artist = array(
+    			'interpret' => $app['db']->fetchColumn($select, array(), 1),
+    			'title' => $app['db']->fetchColumn($select, array(), 0)
+    			);
+    	 	
+    	$select = 'SELECT 
+    				DATE_FORMAT(zeit, "%d.%m.%Y %Hh%i") as zeit, id, count
     				FROM playtime p
-    				where p.track=$track
-    				order by id desc
-    				limit 100";
+    				where p.track=' . $id_track .'
+    				order by id desc' . $limit_str;
     	
     	$res = $app['db']->fetchAll($select);
      
     	$data = array(
     		'playlist' => $app['db']->fetchAll($select),
-    		'track' => $track
+    		'artist' => $artist
         );
     	
         return $app['twig']->render('track.html.twig', $data);
