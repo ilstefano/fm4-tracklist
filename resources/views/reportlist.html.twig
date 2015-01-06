@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+{% set active = 'doctrine' %}
+
+{% block content %}
+
+    <h1>{{ 'FM4 most often played track list'|trans }}</h1>
+    
+    <h2>Max = {{max}}, Varianz = {{varianz}}(Schwelle = {{schwelle*100}}%)</h2>
+
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track.interpret}} --- {{ track.title }} | Count: {{ track.count }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

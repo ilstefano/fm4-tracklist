@@ -10,7 +10,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 $app->get('/track', 'FM4\Controller\TrackController::indexAction')
 ->bind('track');
 
-$app->get('/track/{track}', 'FM4\Controller\TrackController::showTrackAction');
+$app->get('/track/{track}', 'FM4\Controller\TrackController::showTrackPlaylistAction');
+
+$app->get('/report', 'FM4\Controller\ReportController::indexAction')
+->bind('report');
 
 
 $app->match('/', function () use ($app) {
@@ -44,19 +47,6 @@ $app->match('/login', function (Request $request) use ($app) {
     ));
 })->bind('login');
 
-
-#$res = $app['db']->fetchAll('select * from playtime pt, track_playtime tpt, track t  where pt.id=tpt.id_playtime and t.id=tpt.id_track order by pt.id desc limit 10');
-#var_dump($res);
-
-
-$app->match('/doctrine', function () use ($app) {
-    return $app['twig']->render(
-        'doctrine.html.twig',
-        array(
-            'tracks' => $app['db']->fetchAll('select * from playtime pt left join track t on (pt.track=t.id)  order by pt.id desc limit 50')
-        )
-    );
-})->bind('doctrine');
 
 $app->match('/form', function (Request $request) use ($app) {
 

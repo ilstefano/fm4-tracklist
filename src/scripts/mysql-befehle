@@ -30,6 +30,19 @@ mysql -u root fm4 -e 'UPDATE track SET interpret = REPLACE(interpret, "&amp;", "
 mysql -u root fm4 -e 'UPDATE track SET title = REPLACE(title, "&amp;", "&")'
 
 
+Report: Finden des Maximums (variante 1 ist leicht schneller)
+=============================================================
+mysql -u root fm4 -e 'select count(*) as anzahl from track_playtime, track t where id_track=t.id group by id_track order by anzahl desc limit 1' 
+mysql -u root fm4 -e 'select max(anzahl) from (select count(*) as anzahl from track_playtime, track t where id_track=t.id group by id_track) as c'
+
+Nur noch in Playtime: (geht 8xschneller):
+mysql -u root fm4 -e 'select max(anzahl) from (select track, count(*) as anzahl from playtime group by track) as c'
+
+oops ... der join auf playtime ist ja gar nicht notwendig:
+mysql -u root fm4 -e 'select max(anzahl) from (select count(*) as anzahl from track_playtime  group by id_track) as c'
+mysql -u root fm4 -e 'select count(*) as anzahl from track_playtime group by id_track order by anzahl desc limit 1'
+
+
 Todos in der datenbank:
 =======================
 1) Umlaute (vgl. interpret = 'Sterne' --- mysql -u root fm4 -e 'select * from track where interpret rlike "Sterne"'

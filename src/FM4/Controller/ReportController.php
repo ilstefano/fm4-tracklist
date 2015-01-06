@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 // ======================================================================================================================
 
-class TrackController
+class ReportController
 {
 	
 	// ==================================================================================================================
@@ -27,25 +27,42 @@ class TrackController
     	#$app['phptal.view'] = "layout.tal.html";
     	#$app['phptal']->title = "PHPTAL in Silex";
     	
-    	#return $template->execute();    	
+    	#return $template->execute();  
+    	
+    	# finde aktuelles Maximum --- todo: cachen
+    	# wenn track in playtime durchgelaufen ist: $select = 'select max(anzahl) as max from (select count(*) as anzahl from playtime group by track) as c';
+    	# temp:
+    	$select = 'select max(anzahl) as max from (select count(*) as anzahl from playtime where track!=0  group by track) as c';
+    	
+    	$max = $app['db']->fetchColumn($select);
+    	
+    	$schwelle = 0.6; # 80% von max sollen angeziegt werden
+    	$precision = 1; # anuahl an signifikanten stellen, die gerundet werden
+    	
+    	$varianz = floor($max * $schwelle);
+    	
     	
     	$select = 'select
-    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, count, track
-    				from playtime pt
-    				left join track t on (pt.track=t.id)
-    				order by pt.id desc
-    				limit 50';
+    			count(*) as count, t.interpret, t.title
+    			from playtime
+    			left join track t on (track=t.id)
+    			group by track
+    			having count > ' . $varianz .'
+    			order by count desc';
     	
         $data = array(
-        	'tracks' => $app['db']->fetchAll($select)
+        	'tracks' => $app['db']->fetchAll($select),
+        	'varianz' => $varianz,
+        	'max' => $max,
+        	'schwelle' => $schwelle
         );
-        return $app['twig']->render('tracklist.html.twig', $data);
+        return $app['twig']->render('reportlist.html.twig', $data);
     }
     
     // ==================================================================================================================
      
     
-    public function showTrackPlaylistAction(Request $request, Application $app, $track)
+    public function showTrackAction(Request $request, Application $app, $track)
     {
      
     	$select = "SELECT 
