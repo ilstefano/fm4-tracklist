@@ -32,7 +32,7 @@ class TrackController
     	$limit_str = ' limit 50';  
     	
     	$select = 'select
-    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, count, track as trackid
+    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, pt.count as count, track as trackid
     				from playtime pt
     				left join track t on (pt.track=t.id)
     				order by pt.id desc' . $limit_str;
@@ -100,7 +100,7 @@ class TrackController
     	 
     	$artist = $app['db']->fetchColumn($select);
     	
-    	$select = 'select 0 as count, id as trackid, title from track where interpret ="' . $artist .'"';
+    	$select = 'select count, id as trackid, title, DATE_FORMAT(lastrun, "%d.%m.%Y %Hh%i") as lastrun, DATE_FORMAT(firstrun, "%d.%m.%Y %Hh%i") as firstrun from track where interpret ="' . $artist .'"';
     	 
     	$data = array(
     			'tracklist' => $app['db']->fetchAll($select),

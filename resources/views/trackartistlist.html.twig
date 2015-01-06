@@ -7,7 +7,7 @@
 
     <ul>
         {% for track in tracklist %}
-            <li>{{loop.index}}: <a href="{{ path('track') }}/{{ track.trackid }}">{{ track.title }} </a>| Count: {{ track.count }}</li>
+            <li>{{loop.index}}: <a href="{{ path('track') }}/{{ track.trackid }}">{{ track.title }} </a>| Count: {{ track.count }}| Firstrun: {{ track.firstrun }}| Lastrun: {{ track.lastrun }}</li>
         {% endfor %}
     </ul>
 

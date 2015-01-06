@@ -60,6 +60,8 @@ if ($handle = opendir(INPUT_DIR)) {
 			}
 			else
 			{
+				echo "\n";
+				
 				for ($i=0; $i< count($matches[0]); $i++)
 				{
 					$spielzeit = $matches[1][$i];
@@ -74,7 +76,7 @@ if ($handle = opendir(INPUT_DIR)) {
 					{
 					    $spieldatum = date("Y-m-d");
 					}
-					echo "\n\n" . ($i+1) . ") Spielzeit: $spielzeit, Tageszeit: $tageszeit, Spieldatum: $spieldatum.";
+					echo "\n" . ($i+1) . ") Spielzeit: $spielzeit, Tageszeit: $tageszeit, Spieldatum: $spieldatum.";
 					
 					$dateTimeStr = $spieldatum;
 					$dateTimeStr .= " ";
@@ -86,7 +88,7 @@ if ($handle = opendir(INPUT_DIR)) {
 
 					if ($num_rows != 0)
 					{
-						echo "\nAlte Playtime: $dateTimeStr.";
+						echo "\n\nAlte Playtime: $dateTimeStr.";
 						#$erg = mysql_fetch_array($result);
 						#var_dump($erg);
 					}
@@ -106,14 +108,32 @@ if ($handle = opendir(INPUT_DIR)) {
 						$line = mysql_fetch_array($result, MYSQL_ASSOC);
 						$id_playtime = $line["id"];
 
-						echo "\nNeue Playtime: $dateTimeStr, Id: $id_playtime";
+						echo "\n\nNeue Playtime: $dateTimeStr, Id: $id_playtime";
 
 						#
 						# track suchen
 						#
+						
+						$title = $matches[2][$i];
+						$interpret = $matches[3][$i];
 
-						$title = mysql_escape_string (  html_entity_decode ( trim ( $matches[2][$i] )));
-						$interpret = mysql_escape_string (  html_entity_decode ( trim ( $matches[3][$i] )));
+						echo "\n\nTRACK\n\nTitle (match-2):|>|$title|<|, Interpret (match-3):|>|$interpret|<|";						
+						
+						$firstchar = substr($title, 0, 1);
+						
+						# wenn erster buchstabe ein leerzeichen ist, verdreht FM3 title und artist
+						if ($firstchar == ' ') {
+							$title = $matches[3][$i];
+							$interpret = $matches[2][$i];
+							
+							echo "\nSWITCH Title (match-3):|>|$title|<|, Interpret (match-2):|>|$interpret|<|";
+							
+						}
+
+						$title = mysql_escape_string (  html_entity_decode ( trim ( $title )));
+						$interpret = mysql_escape_string (  html_entity_decode ( trim ( $interpret )));
+						
+						echo "\nSTRIPPED: Title:|>|$title|<|, Interpret:|>|$interpret|<|";					
 
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
@@ -131,7 +151,6 @@ if ($handle = opendir(INPUT_DIR)) {
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
 							$status = 'Bekannter';
-
 						}
 						else
 						{
@@ -139,7 +158,7 @@ if ($handle = opendir(INPUT_DIR)) {
 							# track wird eingetragen
 							#
 
-							$query = "insert into track set title='$title', interpret='$interpret'";
+							$query = "insert into track set title='$title', interpret='$interpret', firstrun='$dateTimeStr'";
 							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 
 							# neue id zurückholen
@@ -170,6 +189,9 @@ if ($handle = opendir(INPUT_DIR)) {
 						# - von playtime direkt nach track joinen
 						# - in playtimne die aktuellen counts des tracks eintragen
 						$query = "update playtime set track=$id_track, count=$count where id=$id_playtime";
+						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+						
+						$query = "update track set count=$count, lastrun='$dateTimeStr' where id=$id_track";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 												
 						echo "\n$status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";

@@ -43,6 +43,13 @@ mysql -u root fm4 -e 'select max(anzahl) from (select count(*) as anzahl from tr
 mysql -u root fm4 -e 'select count(*) as anzahl from track_playtime group by id_track order by anzahl desc limit 1'
 
 
+Artistlist: mehr cache-daten in Track
+=============================================================
+mysql -u root fm4 -e 'alter table track add column (count int, lastrun datetime, firstrun datetime)'
+
+
+
+
 Todos in der datenbank:
 =======================
 1) Umlaute (vgl. interpret = 'Sterne' --- mysql -u root fm4 -e 'select * from track where interpret rlike "Sterne"'
