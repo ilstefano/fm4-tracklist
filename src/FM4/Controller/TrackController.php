@@ -32,7 +32,7 @@ class TrackController
     	$limit_str = ' limit 50';  
     	
     	$select = 'select
-    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, count, track
+    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, count, track as trackid
     				from playtime pt
     				left join track t on (pt.track=t.id)
     				order by pt.id desc' . $limit_str;
@@ -46,39 +46,68 @@ class TrackController
     // ==================================================================================================================
      
     
-    public function showTrackPlaylistAction(Request $request, Application $app, $id_track)
+    public function showTrackPlaylistAction(Request $request, Application $app, $id)
     {
      
     	$limit_str = ' limit 50';
     	
     	$limit_req = $request->query->get('all', 0);
+    	
     	if ($limit_req)
     		$limit_str = '';
     	
-    	$select = 'select
-    				title, interpret
-    				from track
-    				where id=' . $id_track;
+    	$select = 'select title, interpret from track where id=' . $id;
     	
-    	$artist = array(
-    			'interpret' => $app['db']->fetchColumn($select, array(), 1),
+    	$track = array(
+    			'artist' => $app['db']->fetchColumn($select, array(), 1),
     			'title' => $app['db']->fetchColumn($select, array(), 0)
     			);
     	 	
-    	$select = 'SELECT 
+    	$select = 'select 
     				DATE_FORMAT(zeit, "%d.%m.%Y %Hh%i") as zeit, id, count
-    				FROM playtime p
-    				where p.track=' . $id_track .'
+    				from playtime p
+    				where p.track=' . $id .'
     				order by id desc' . $limit_str;
     	
     	$res = $app['db']->fetchAll($select);
      
     	$data = array(
     		'playlist' => $app['db']->fetchAll($select),
-    		'artist' => $artist
+    		'track' => $track
         );
     	
-        return $app['twig']->render('track.html.twig', $data);
+        return $app['twig']->render('trackplaylist.html.twig', $data);
+    }
+    
+    // ==================================================================================================================
+     
+    
+    public function showTrackArtistIndexAction(Request $request, Application $app)
+    {
+    	 
+		return 'No Index Action for artist';
+    	 
+    	return $app['twig']->render('xxx.html.twig', $data);
+    } 
+    
+    // ==================================================================================================================
+     
+    
+    public function showTrackArtistListAction(Request $request, Application $app, $id)
+    {
+    
+    	$select = 'select interpret from track where id =' . $id;
+    	 
+    	$artist = $app['db']->fetchColumn($select);
+    	
+    	$select = 'select 0 as count, id as trackid, title from track where interpret ="' . $artist .'"';
+    	 
+    	$data = array(
+    			'tracklist' => $app['db']->fetchAll($select),
+    			'artist' => $artist
+    	);
+    
+    	return $app['twig']->render('trackartistlist.html.twig', $data);
     }
     
 }

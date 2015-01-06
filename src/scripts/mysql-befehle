@@ -60,3 +60,6 @@ Todos in der datenbank:
  1027  mysql -u root fm4 -e 'SELECT * FROM track WHERE HEX(interpret) rlike "c3bc" order by interpret';
  1028  mysql -u root fm4 -e 'SELECT * FROM track WHERE interpret rlike "ü" order by interpret';
  1029  mysql -u root fm4 -e 'SELECT *, hex(interpret) FROM track WHERE interpret rlike "ü" order by interpret';
+ 
+ 
+ 3) trentemöller / moan zusammenführen  

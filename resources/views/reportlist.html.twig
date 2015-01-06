@@ -8,7 +8,7 @@
 
     <ul>
         {% for track in tracks %}
-            <li>{{ track.interpret}} --- <a href="{{ path('track') }}/{{ track.track }}?all=1">{{ track.title }}</a> | Count: {{ track.count }}</li>
+            <li><a href="{{ path('artist') }}/{{ track.track }}">{{ track.interpret}}</a> --- <a href="{{ path('track') }}/{{ track.track }}?all=1">{{ track.title }}</a> | Count: {{ track.count }}</li>
         {% endfor %}
     </ul>
 

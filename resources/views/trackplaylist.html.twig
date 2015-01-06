@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <h1>{{artist.interpret}} --- {{artist.title}}  --- {{ playlist[0]['count']}} {{ 'mal gespielt'|trans}} </h1>
+    <h1>{{track.artist}} --- {{track.title}}  --- {{ playlist[0]['count']}} {{ 'mal gespielt'|trans}} </h1>
 
     <ul>
         {% for play in playlist %}

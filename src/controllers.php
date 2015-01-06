@@ -5,27 +5,45 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 
+# =========================================
+# track
+# =========================================
 
-
+# tracklist
 $app->get('/track', 'FM4\Controller\TrackController::indexAction')
 ->bind('track');
 
-$app->get('/track/{id_track}', 'FM4\Controller\TrackController::showTrackPlaylistAction');
+# playlist of track
+$app->get('/track/{id}', 'FM4\Controller\TrackController::showTrackPlaylistAction');
+
+# interpreter
+$app->get('/artist', 'FM4\Controller\TrackController::showTrackArtistIndexAction')
+->bind('artist');
+
+$app->get('/artist/{id}', 'FM4\Controller\TrackController::showTrackArtistListAction');
+
+# =========================================
+# report
+# =========================================
 
 $app->get('/report', 'FM4\Controller\ReportController::indexAction')
 ->bind('report');
 
+# =========================================
+# homepage
+# =========================================
 
 $app->match('/', function () use ($app) {
-    $app['session']->getFlashBag()->add('warning', 'Warning flash message');
-    $app['session']->getFlashBag()->add('info', 'Info flash message');
-    $app['session']->getFlashBag()->add('success', 'Success flash message');
-    $app['session']->getFlashBag()->add('error', 'Error flash message');
+	$app['session']->getFlashBag()->add('warning', 'Warning flash message');
+	$app['session']->getFlashBag()->add('info', 'Info flash message');
+	$app['session']->getFlashBag()->add('success', 'Success flash message');
+	$app['session']->getFlashBag()->add('error', 'Error flash message');
 
-    #return 'Soso.';
-
-    return $app['twig']->render('index.html.twig');
+	return $app['twig']->render('index.html.twig');
 })->bind('homepage');
+
+
+# other stuff
 
 $app->match('/login', function (Request $request) use ($app) {
     $form = $app['form.factory']->createBuilder('form')
