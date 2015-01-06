@@ -7,8 +7,13 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 
+// ======================================================================================================================
+
 class TrackController
 {
+	
+	// ==================================================================================================================
+	
     public function indexAction(Request $request, Application $app)
     {
     	
@@ -37,13 +42,23 @@ class TrackController
         return $app['twig']->render('tracklist.html.twig', $data);
     }
     
+    // ==================================================================================================================
+     
+    
     public function showTrackAction(Request $request, Application $app, $track)
     {
      
-
+    	$select = "SELECT 
+    				DATE_FORMAT(zeit, '%d.%m.%Y %Hh%i') as zeit, id
+    				FROM playtime p
+    				where p.track=$track
+    				order by id desc
+    				limit 100";
+    	
+    	$res = $app['db']->fetchAll($select);
      
     	$data = array(
-    		'playlist' => null,
+    		'playlist' => $app['db']->fetchAll($select),
     		'track' => $track
         );
     	
@@ -51,3 +66,5 @@ class TrackController
     }
     
 }
+
+// ======================================================================================================================
