@@ -48,6 +48,12 @@ Artistlist: mehr cache-daten in Track
 mysql -u root fm4 -e 'alter table track add column (count int, lastrun datetime, firstrun datetime)'
 
 
+Switch title/interpret vermerken (zum opt. restaurieren ....)
+=============================================================
+mysql -u root fm4 -e 'alter table track add column (switch boolean default false)'
+mysql -u root fm4 -e 'alter table playtime add column (switch boolean default false)'
+
+
 
 
 Todos in der datenbank:

@@ -2,7 +2,7 @@
 <?php
 
 $link = mysql_connect("localhost", "root", "") or die("Could not connect");
-print "Connected successfully";
+
 mysql_select_db("fm4") or die("Could not select database");
 
 date_default_timezone_set('Europe/Berlin');
@@ -37,30 +37,36 @@ if ($handle = opendir(INPUT_DIR)) {
 			echo "\nDateistempel : " . date("r", $filemtime);
 			echo "\n#####################################################################";
 
-
+			echo "\nMatch-Analyse:";
+			echo "\n---------------------------------------------------------------------";			
+			
 			$p="/([0-9]{2}:[0-9]{2}): <b>([^<]*)<\/b> \| <i>([^<]*)<\/i>/i";
 
 			preg_match_all($p, $o, $matches);
 
 			#var_dump($matches);
 						
-			for ($i=0; $i< count($matches[0]); $i++) {
-
-				echo "\n\nmatched: ".$matches[0][$i];
-				echo "\n1: ".$matches[1][$i]."  ". bin2hex($matches[1][$i]);
-				echo "\n2: ".$matches[2][$i]."  ". bin2hex($matches[2][$i]);
-				echo "\n3: ".$matches[3][$i]."  ". bin2hex($matches[3][$i]);
+			for ($i=0; $i< count($matches[0]); $i++)
+			{
+				echo "\n" . ($i+1) . ") matched: ".$matches[0][$i];
+				echo "\n 1: ".$matches[1][$i]."  ". bin2hex($matches[1][$i]);
+				echo "\n 2: ".$matches[2][$i]."  ". bin2hex($matches[2][$i]);
+				echo "\n 3: ".$matches[3][$i]."  ". bin2hex($matches[3][$i]);
 
 				$compStr .= $matches[1][$i].$matches[2][$i].$matches[3][$i];
 			}
 			
 			if ($compStr == $compStrOld)
 			{
-				echo "\n\n$compStr ==>  File gleicht Vorgängerin.";
+				echo "\n---------------------------------------------------------------------";
+				echo "\n$compStr ==>  File gleicht Vorgängerin.";
+				echo "\n---------------------------------------------------------------------";
 			}
 			else
 			{
-				echo "\n";
+				echo "\n---------------------------------------------------------------------";
+				echo "\nPlaytime-Analyse:";
+				echo "\n---------------------------------------------------------------------";
 				
 				for ($i=0; $i< count($matches[0]); $i++)
 				{
@@ -76,6 +82,7 @@ if ($handle = opendir(INPUT_DIR)) {
 					{
 					    $spieldatum = date("Y-m-d");
 					}
+					
 					echo "\n" . ($i+1) . ") Spielzeit: $spielzeit, Tageszeit: $tageszeit, Spieldatum: $spieldatum.";
 					
 					$dateTimeStr = $spieldatum;
@@ -88,7 +95,7 @@ if ($handle = opendir(INPUT_DIR)) {
 
 					if ($num_rows != 0)
 					{
-						echo "\n\nAlte Playtime: $dateTimeStr.";
+						echo " --> Alte Playtime: $dateTimeStr.";
 						#$erg = mysql_fetch_array($result);
 						#var_dump($erg);
 					}
@@ -108,7 +115,8 @@ if ($handle = opendir(INPUT_DIR)) {
 						$line = mysql_fetch_array($result, MYSQL_ASSOC);
 						$id_playtime = $line["id"];
 
-						echo "\n\nNeue Playtime: $dateTimeStr, Id: $id_playtime";
+						echo " --> Neue Playtime: $dateTimeStr";
+						echo "\n $dateTimeStr / $id_playtime: NEU id_playtime: $id_playtime";
 
 						#
 						# track suchen
@@ -117,23 +125,29 @@ if ($handle = opendir(INPUT_DIR)) {
 						$title = $matches[2][$i];
 						$interpret = $matches[3][$i];
 
-						echo "\n\nTRACK\n\nTitle (match-2):|>|$title|<|, Interpret (match-3):|>|$interpret|<|";						
+						echo "\n $dateTimeStr / $id_playtime: TRACK ANALYSE: Title (match-2):|>|$title|<|, Interpret (match-3):|>|$interpret|<|";						
 						
 						$firstchar = substr($title, 0, 1);
 						
 						# wenn erster buchstabe ein leerzeichen ist, verdreht FM3 title und artist
-						if ($firstchar == ' ') {
+						$switch = 0;
+						if ($firstchar == ' ')
+						{
 							$title = $matches[3][$i];
 							$interpret = $matches[2][$i];
 							
-							echo "\nSWITCH Title (match-3):|>|$title|<|, Interpret (match-2):|>|$interpret|<|";
+							echo "\n $dateTimeStr / $id_playtime SWITCH: Title (match-3):|>|$title|<|, Interpret (match-2):|>|$interpret|<|";
 							
+							$switch = 1;						
 						}
 
+						#
+						# escapen bzw. strippen
+						#
 						$title = mysql_escape_string (  html_entity_decode ( trim ( $title )));
 						$interpret = mysql_escape_string (  html_entity_decode ( trim ( $interpret )));
 						
-						echo "\nSTRIPPED: Title:|>|$title|<|, Interpret:|>|$interpret|<|";					
+						echo "\n $dateTimeStr / $id_playtime: STRIPPED: Title:|>|$title|<|, Interpret:|>|$interpret|<|";					
 
 						$query = "select id from track where title='$title' and interpret='$interpret'";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
@@ -188,19 +202,22 @@ if ($handle = opendir(INPUT_DIR)) {
 
 						# - von playtime direkt nach track joinen
 						# - in playtimne die aktuellen counts des tracks eintragen
-						$query = "update playtime set track=$id_track, count=$count where id=$id_playtime";
+						$query = "update playtime set track=$id_track, count=$count, switch=$switch where id=$id_playtime";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 						
-						$query = "update track set count=$count, lastrun='$dateTimeStr' where id=$id_track";
+						$query = "update track set count=$count, lastrun='$dateTimeStr', switch=$switch where id=$id_track";
 						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
 												
-						echo "\n$status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";
+						echo "\n $dateTimeStr / $id_playtime: $status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";
 					}
 				}
 			}
 		}
 
-	echo "\n\n";
+	echo "\n---------------------------------------------------------------------";
+	echo "\nFinished.";
+	echo "\n---------------------------------------------------------------------";
+	
 	mysql_close($link);
 	closedir($handle);
 }
