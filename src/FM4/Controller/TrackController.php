@@ -14,7 +14,13 @@ class TrackController
 	
 	// ==================================================================================================================
 	
-    public function indexAction(Request $request, Application $app)
+    /**
+     * Einstiegsseite: zeige die zuletzt gespielten Tracks
+     * 
+     * @param Request $request
+     * @param Application $app
+     */
+	public function indexAction(Request $request, Application $app)
     {
     	
     	#$ret = file_get_contents(__DIR__ . "/../../../app/views/layout.tal.html");
@@ -28,14 +34,37 @@ class TrackController
     	#$app['phptal']->title = "PHPTAL in Silex";
     	
     	#return $template->execute();    	
+
+    	# bestimme opt. 'n': Anzahl an auszugebenden Tracks
+    	$n = $request->query->get('n', 0);
     	
-    	$limit_str = ' limit 50';  
+    	$n_max = 1000;
+    	$n_default = 10;
+    	if ((!$n) || (preg_match('/^[0-9]*$/', $n) === 0)) $n = $n_default; 	
+    	if ($n > $n_max) $n = $n_max;
+    	
+    	# bestimme opt. 'id': "schwerpunkt" der Ausgabe
+    	$id = $request->query->get('id', 0);
+    	
+    	$select = 'select max(id) from playtime';
+    	$id_max =  $app['db']->fetchColumn($select); 	
+    	if ((!$id) || (preg_match('/^[0-9]*$/', $n) === 0) || ($id > $id_max))
+    	{
+    		# kein neuer schwerpunkt: vom jüngsten moment an
+    		$id = $id_max;
+    		$dateFormatStr = '%d.%m. %Hh%i'; # sollte das in die view ???
+    	} else {
+    		$id += floor($n/2);
+    		$dateFormatStr = '%d.%m.%Y %Hh%i'; # mit jahr, wenn andere auswahl
+    	}
+
     	
     	$select = 'select
-    				DATE_FORMAT(zeit, "%d.%m. %Hh%i") as zeit, interpret, title, pt.count as count, track as trackid
+    				pt.id, DATE_FORMAT(zeit, "' . $dateFormatStr . '") as zeit, interpret, title, firstrun, pt.switch, pt.count as count, track as trackid
     				from playtime pt
     				left join track t on (pt.track=t.id)
-    				order by pt.id desc' . $limit_str;
+    				where pt.id <= ' . $id .'
+    				order by pt.id desc limit ' . $n;	
     	
         $data = array(
         	'tracks' => $app['db']->fetchAll($select)
@@ -58,9 +87,11 @@ class TrackController
     	
     	$select = 'select title, interpret from track where id=' . $id;
     	
+    	$row = $app['db']->fetchAssoc($select);
+    	
     	$track = array(
-    			'artist' => $app['db']->fetchColumn($select, array(), 1),
-    			'title' => $app['db']->fetchColumn($select, array(), 0)
+    			'artist' => $row['interpret'],
+    			'title' => $row['title']
     			);
     	 	
     	$select = 'select 

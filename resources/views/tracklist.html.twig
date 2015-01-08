@@ -7,7 +7,7 @@
 
     <ul>
         {% for track in tracks %}
-            <li>{{ track.zeit }} | <a href="{{ path('artist') }}/{{ track.trackid }}">{{ track.interpret}}</a> --- <a href="{{ path('track') }}/{{ track.trackid }}">{{ track.title }} </a>| Count: {{ track.count }}</li>
+            <li>{{ track.id }} // {{ track.zeit }} | :{{ track.switch }}: <a href="{{ path('artist') }}/{{ track.trackid }}">{{ track.interpret}}</a> --- <a href="{{ path('track') }}/{{ track.trackid }}">{{ track.title }} </a>| Count: {{ track.count }}| Firstrun: {{ track.firstrun }}</li>
         {% endfor %}
     </ul>
 
