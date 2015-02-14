@@ -1,11 +1,12 @@
-#<IfModule mod_rewrite.c>
-#    Options -MultiViews
-#
-#    RewriteEngine On
-#    RewriteBase webdev/musicbox
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteRule ^ index.php [L]
-#</IfModule>
+<IfModule mod_rewrite.c>
+    #Options -MultiViews
+
+    RewriteEngine On
+    RewriteBase /fm4/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^index.php [L]
+    RewriteRule ^index_dev.php [L]
+</IfModule>
 
 
-FallbackResource /gitdev/silex-test/web/index.php
+FallbackResource /fm4/index.php

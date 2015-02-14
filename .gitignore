@@ -4,3 +4,4 @@
 /vendor/
 /web/assets/*
 .project
+/nbproject/private/
