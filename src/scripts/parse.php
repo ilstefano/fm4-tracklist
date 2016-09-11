@@ -1,28 +1,25 @@
-#!/usr/local/bin/php
+#!/usr/bin/php
 <?php
 
-$link = mysql_connect("localhost", "root", "") or die("Could not connect");
+$link = mysqli_connect("localhost", "root", "") or die("Could not connect");
 
-mysql_select_db("fm4") or die("Could not select database");
+mysqli_select_db($link, "fm4") or die("Could not select database");
 
 date_default_timezone_set('Europe/Berlin');
 
-define('INPUT_DIR', 'trackservice');
-
-#if ($handle = opendir('input')) {
-if ($handle = opendir(INPUT_DIR)) {
+if ($handle = opendir('.')) {
 
 	$compStrOld = "";
 	$compStr = "";
 
-	while (false !== ($file = readdir($handle)))
+	while (false !== ($file = readdir()))
 		
-		if ($file != "." && $file != ".." && ereg("^main", $file)) {
+		if ($file != "." && $file != ".." && preg_match("/^main/", $file)) {
 		
 			$compStrOld = $compStr;
 			$compStr = "";
 
-			$filename = INPUT_DIR . '/' . $file;
+			$filename = $file;
 			$fd = fopen ($filename, "r");
 			$o = fread ($fd, filesize ($filename));
 			
@@ -90,8 +87,8 @@ if ($handle = opendir(INPUT_DIR)) {
 					$dateTimeStr .= $spielzeit . ":00";
 
 					$query = "select id from playtime where zeit='$dateTimeStr'";
-					$result = mysql_query($query) or die("Query $query failed. " . mysql_error());
-					$num_rows = mysql_num_rows($result);
+					$result = mysqli_query($link, $query) or die("Query $query failed. " . mysqli_error($link));
+					$num_rows = mysqli_num_rows($result);
 
 					if ($num_rows != 0)
 					{
@@ -105,14 +102,14 @@ if ($handle = opendir(INPUT_DIR)) {
 						# spielzeit wird eingetragen
 						#
 
-						$query = "insert into playtime set zeit='$dateTimeStr'";
-						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+						$query = "insert into playtime set zeit='$dateTimeStr', track=null";
+						$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
 						# neue id zurückholen
 						$query = "select id from playtime where zeit='$dateTimeStr'";
-						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+						$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
-						$line = mysql_fetch_array($result, MYSQL_ASSOC);
+						$line = mysqli_fetch_array($result, MYSQLI_ASSOC);
 						$id_playtime = $line["id"];
 
 						echo " --> Neue Playtime: $dateTimeStr";
@@ -144,25 +141,25 @@ if ($handle = opendir(INPUT_DIR)) {
 						#
 						# escapen bzw. strippen
 						#
-						$title = mysql_escape_string (  html_entity_decode ( trim ( $title )));
-						$interpret = mysql_escape_string (  html_entity_decode ( trim ( $interpret )));
+						$title = mysqli_escape_string ($link, html_entity_decode ( trim ( $title )));
+						$interpret = mysqli_escape_string ($link, html_entity_decode ( trim ( $interpret )));
 						
 						echo "\n $dateTimeStr / $id_playtime: STRIPPED: Title:|>|$title|<|, Interpret:|>|$interpret|<|";					
 
 						$query = "select id from track where title='$title' and interpret='$interpret'";
-						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
-						$num_rows = mysql_num_rows($result);
+						$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
+						$num_rows = mysqli_num_rows($result);
 
 						if ($num_rows != 0)
 						{
 							#
 							# alter track zu playtime zuordnung
 							#
-							$line = mysql_fetch_array($result, MYSQL_ASSOC);
+							$line = mysqli_fetch_array($result, MYSQLI_ASSOC);
 							$id_track = $line["id"];
 
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
-							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+							$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 						
 							$status = 'Bekannter';
 						}
@@ -173,20 +170,20 @@ if ($handle = opendir(INPUT_DIR)) {
 							#
 
 							$query = "insert into track set title='$title', interpret='$interpret', firstrun='$dateTimeStr'";
-							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+							$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
 							# neue id zurückholen
 							$query = "select id from track where title='$title' and interpret='$interpret'";
-							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+							$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
 							#
 							# neuer track zu playtime zuordnung
 							#
-							$line = mysql_fetch_array($result, MYSQL_ASSOC);
+							$line = mysqli_fetch_array($result, MYSQLI_ASSOC);
 							$id_track = $line["id"];
 
 							$query = "insert into track_playtime set id_track=$id_track, id_playtime=$id_playtime";
-							$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+							$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 							
 							$status = 'Neuer';
 						}
@@ -196,17 +193,17 @@ if ($handle = opendir(INPUT_DIR)) {
 
 						# bisherige anzahl an spielzeiten feststellen
 						$query = "select count(*) as count from track_playtime where id_track=$id_track";
-						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());						
-						$line = mysql_fetch_array($result, MYSQL_ASSOC);	
+						$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));						
+						$line = mysqli_fetch_array($result, MYSQLI_ASSOC);	
 						$count = $line['count'];
 
 						# - von playtime direkt nach track joinen
 						# - in playtimne die aktuellen counts des tracks eintragen
 						$query = "update playtime set track=$id_track, count=$count, switch=$switch where id=$id_playtime";
-						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+						$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 						
 						$query = "update track set count=$count, lastrun='$dateTimeStr', switch=$switch where id=$id_track";
-						$result = mysql_query($query) or die("\nQuery $query failed. " . mysql_error());
+						$result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 												
 						echo "\n $dateTimeStr / $id_playtime: $status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";
 					}
@@ -218,7 +215,7 @@ if ($handle = opendir(INPUT_DIR)) {
 	echo "\nFinished.";
 	echo "\n---------------------------------------------------------------------";
 	
-	mysql_close($link);
+	mysqli_close($link);
 	closedir($handle);
 }
 ?>

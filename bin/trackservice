@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd /home/stl/git/fm4-tracklist/var/parse
+/usr/bin/wget http://fm4.orf.at/trackservicepopup/main -o /home/stl/git/fm4-tracklist/var/fm4_trackserve-parse.log
+
+/home/stl/git/fm4-tracklist/src/scripts/parse.php >> parse.out
+rm main*
