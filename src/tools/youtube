@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "your arg: $1"
+
+mkdir -p ~/30_Media/Musik
+cd  ~/30_Media/Musik
+
+youtube-dl -x --audio-format mp3 -o '%(title)s.%(ext)s' $1
+
+# über ffmpeg:
+# ffmpeg -i Temples\ -\ Certainty-h6zdVaAe0OE.mkv -vn -acodec libmp3lame Temples\ -\ Certainty.mp3
+
