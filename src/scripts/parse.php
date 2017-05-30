@@ -126,7 +126,7 @@ foreach ($items as $item) {
             $query = "update playtime set track=$id_track, count=$count where id=$id_playtime";
             $result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
-            $query = "update track set count=$count, lastrun='$dateTimeStr', switch=$switch where id=$id_track";
+            $query = "update track set count=$count, lastrun='$dateTimeStr' where id=$id_track";
             $result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
             echo "\n $dateTimeStr / $id_playtime: $status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";
