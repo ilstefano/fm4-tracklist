@@ -8,7 +8,7 @@ date_default_timezone_set('Europe/Berlin');
 
 $json = file_get_contents('fm4.json');
 $obj = json_decode($json);
-$items = $obj[0]->items;
+
 
 
 echo "\n#####################################################################";
@@ -22,8 +22,8 @@ echo "\n---------------------------------------------------------------------";
 
 $i = 0;
 
-
-foreach ($items as $item) {
+foreach ($obj as $o)
+foreach ($o->items as $item) {
     $i++;
     
     $title = property_exists($item, 'title') ? $item->title : '';

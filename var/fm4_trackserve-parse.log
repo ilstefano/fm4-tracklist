@@ -1,11 +1,11 @@
---2017-05-30 21:22:37--  https://audioapi.orf.at/fm4/api/json/current/live
+--2017-05-31 01:12:40--  https://audioapi.orf.at/fm4/api/json/current/live
 Auflösen des Hostnamen »audioapi.orf.at (audioapi.orf.at)«... 194.232.104.126
 Verbindungsaufbau zu audioapi.orf.at (audioapi.orf.at)|194.232.104.126|:443... verbunden.
 HTTP-Anforderung gesendet, warte auf Antwort... 200 OK
 Länge: nicht spezifiziert [application/json]
 In »»live«« speichern.
 
-     0K .......... ..                                          5,19M=0,002s
+     0K .......... .                                           6,96M=0,002s
 
-2017-05-30 21:22:37 (5,19 MB/s) - »live« gespeichert [12416]
+2017-05-31 01:12:40 (6,96 MB/s) - »live« gespeichert [12022]
 
