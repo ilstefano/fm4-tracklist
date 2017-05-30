@@ -25,10 +25,15 @@ $i = 0;
 
 foreach ($items as $item) {
     $i++;
+    
+    $title = property_exists($item, 'title') ? $item->title : '';
+    $interpreter = property_exists($item, 'interpreter') ? $item->interpreter : '';
+    
+    echo "\n$item->id, $item->startISO, $item->type, $title, $interpreter";
 
     if ($item->type == 'M') {
 
-        echo "\n$item->id, $item->startISO, $item->title, $item->interpreter";
+        echo "\n$item->id, $item->startISO, $title, $interpreter";
 
         $spielid = $item->id;
 
@@ -61,20 +66,17 @@ foreach ($items as $item) {
             # track suchen
             #
 
-            $title = $item->title;
-            $interpret = $item->interpreter;
-
-            echo "\n $spielid: TRACK ANALYSE: Title (match-2):|>|$title|<|, Interpret (match-3):|>|$interpret|<|";
+            echo "\n $spielid: TRACK ANALYSE: Title:|>|$title|<|, Interpret :|>|$interpreter|<|";
 
             #
             # escapen bzw. strippen
             #
             $title = mysqli_escape_string($link, html_entity_decode(trim($title)));
-            $interpret = mysqli_escape_string($link, html_entity_decode(trim($interpret)));
+            $interpreter = mysqli_escape_string($link, html_entity_decode(trim($interpreter)));
 
-            echo "\n $spielid: STRIPPED: Title:|>|$title|<|, Interpret:|>|$interpret|<|";
+            echo "\n $spielid: STRIPPED: Title:|>|$title|<|, Interpret:|>|$interpreter|<|";
 
-            $query = "select id from track where title='$title' and interpret='$interpret'";
+            $query = "select id from track where title='$title' and interpret='$interpreter'";
             $result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
             $num_rows = mysqli_num_rows($result);
 
@@ -94,11 +96,11 @@ foreach ($items as $item) {
                 # track wird eingetragen
                 #
 
-                $query = "insert into track set title='$title', interpret='$interpret', firstrun='$dateTimeStr'";
+                $query = "insert into track set title='$title', interpret='$interpreter', firstrun='$dateTimeStr'";
                 $result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
                 # neue id zurückholen
-                $query = "select id from track where title='$title' and interpret='$interpret'";
+                $query = "select id from track where title='$title' and interpret='$interpreter'";
                 $result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
                 #
@@ -129,7 +131,7 @@ foreach ($items as $item) {
             $query = "update track set count=$count, lastrun='$dateTimeStr' where id=$id_track";
             $result = mysqli_query($link, $query) or die("\nQuery $query failed. " . mysqli_error($link));
 
-            echo "\n $dateTimeStr / $id_playtime: $status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpret|<|, Count:$count";
+            echo "\n $dateTimeStr / $id_playtime: $status Track: $id_track Title:|>|$title|<|, Interpret:|>|$interpreter|<|, Count:$count";
         }
     }
 }
