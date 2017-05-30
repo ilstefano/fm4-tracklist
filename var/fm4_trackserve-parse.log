@@ -1,11 +1,11 @@
---2016-09-11 13:47:45--  http://fm4.orf.at/trackservicepopup/main
-Auflösen des Hostnamen »fm4.orf.at (fm4.orf.at)«... 194.232.104.123, 2a01:468:1000:9::123
-Verbindungsaufbau zu fm4.orf.at (fm4.orf.at)|194.232.104.123|:80... verbunden.
+--2017-05-30 21:22:37--  https://audioapi.orf.at/fm4/api/json/current/live
+Auflösen des Hostnamen »audioapi.orf.at (audioapi.orf.at)«... 194.232.104.126
+Verbindungsaufbau zu audioapi.orf.at (audioapi.orf.at)|194.232.104.126|:443... verbunden.
 HTTP-Anforderung gesendet, warte auf Antwort... 200 OK
-Länge: 5730 (5,6K) [text/html]
-In »»main.11«« speichern.
+Länge: nicht spezifiziert [application/json]
+In »»live«« speichern.
 
-     0K .....                                                 100% 16,9M=0s
+     0K .......... ..                                          5,19M=0,002s
 
-2016-09-11 13:47:45 (16,9 MB/s) - »»main.11«« gespeichert [5730/5730]
+2017-05-30 21:22:37 (5,19 MB/s) - »live« gespeichert [12416]
 

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cd /home/stl/git/fm4-tracklist/var/parse
-/usr/bin/wget http://fm4.orf.at/trackservicepopup/main -o /home/stl/git/fm4-tracklist/var/fm4_trackserve-parse.log
+/usr/bin/wget https://audioapi.orf.at/fm4/api/json/current/live -o /home/stl/git/fm4-tracklist/var/fm4_trackserve-parse.log
+mv live fm4.json
 
 /home/stl/git/fm4-tracklist/src/scripts/parse.php >> parse.out
-rm main*
+

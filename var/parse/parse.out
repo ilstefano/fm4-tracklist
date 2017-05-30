@@ -1207,3 +1207,254 @@ Playtime-Analyse:
 ---------------------------------------------------------------------
 Finished.
 ---------------------------------------------------------------------
+#####################################################################
+Aktuelle Zeit: 11.09.2016 17:20
+Dateiname    : main
+Dateistempel : Sun, 11 Sep 2016 17:20:30 +0200
+#####################################################################
+Match-Analyse:
+---------------------------------------------------------------------
+1) matched: 16:37: <b> Stick Together</b> | <i>Eels</i>
+ 1: 16:37  31363a3337
+ 2:  Stick Together  20537469636b20546f676574686572
+ 3: Eels  45656c73
+2) matched: 16:41: <b>South Seas</b> | <i>Menage A Trois</i>
+ 1: 16:41  31363a3431
+ 2: South Seas  536f7574682053656173
+ 3: Menage A Trois  4d656e61676520412054726f6973
+3) matched: 16:45: <b> Fm4 Close Up</b> | <i>The Light Between Oceans</i>
+ 1: 16:45  31363a3435
+ 2:  Fm4 Close Up  20466d3420436c6f7365205570
+ 3: The Light Between Oceans  546865204c69676874204265747765656e204f6365616e73
+4) matched: 16:48: <b>One More Night</b> | <i>Michael Kiwanuka</i>
+ 1: 16:48  31363a3438
+ 2: One More Night  4f6e65204d6f7265204e69676874
+ 3: Michael Kiwanuka  4d69636861656c204b6977616e756b61
+5) matched: 16:52: <b>Pink & White</b> | <i>Frank Ocean</i>
+ 1: 16:52  31363a3532
+ 2: Pink & White  50696e6b2026205768697465
+ 3: Frank Ocean  4672616e6b204f6365616e
+6) matched: 16:54: <b>Isto E Samba (stereotyp Rmx)</b> | <i>Pilots On Dope</i>
+ 1: 16:54  31363a3534
+ 2: Isto E Samba (stereotyp Rmx)  4973746f20452053616d6261202873746572656f74797020526d7829
+ 3: Pilots On Dope  50696c6f7473204f6e20446f7065
+---------------------------------------------------------------------
+Playtime-Analyse:
+---------------------------------------------------------------------
+1) Spielzeit: 16:37, Tageszeit: 17:20, Spieldatum: 2016-09-11. --> Neue Playtime: 2016-09-11 16:37:00
+ 2016-09-11 16:37:00 / 779774: NEU id_playtime: 779774
+ 2016-09-11 16:37:00 / 779774: TRACK ANALYSE: Title (match-2):|>| Stick Together|<|, Interpret (match-3):|>|Eels|<|
+ 2016-09-11 16:37:00 / 779774 SWITCH: Title (match-3):|>|Eels|<|, Interpret (match-2):|>| Stick Together|<|
+ 2016-09-11 16:37:00 / 779774: STRIPPED: Title:|>|Eels|<|, Interpret:|>|Stick Together|<|
+ 2016-09-11 16:37:00 / 779774: Neuer Track: 27949 Title:|>|Eels|<|, Interpret:|>|Stick Together|<|, Count:1
+2) Spielzeit: 16:41, Tageszeit: 17:20, Spieldatum: 2016-09-11. --> Neue Playtime: 2016-09-11 16:41:00
+ 2016-09-11 16:41:00 / 779775: NEU id_playtime: 779775
+ 2016-09-11 16:41:00 / 779775: TRACK ANALYSE: Title (match-2):|>|South Seas|<|, Interpret (match-3):|>|Menage A Trois|<|
+ 2016-09-11 16:41:00 / 779775: STRIPPED: Title:|>|South Seas|<|, Interpret:|>|Menage A Trois|<|
+ 2016-09-11 16:41:00 / 779775: Neuer Track: 27950 Title:|>|South Seas|<|, Interpret:|>|Menage A Trois|<|, Count:1
+3) Spielzeit: 16:45, Tageszeit: 17:20, Spieldatum: 2016-09-11. --> Neue Playtime: 2016-09-11 16:45:00
+ 2016-09-11 16:45:00 / 779776: NEU id_playtime: 779776
+ 2016-09-11 16:45:00 / 779776: TRACK ANALYSE: Title (match-2):|>| Fm4 Close Up|<|, Interpret (match-3):|>|The Light Between Oceans|<|
+ 2016-09-11 16:45:00 / 779776 SWITCH: Title (match-3):|>|The Light Between Oceans|<|, Interpret (match-2):|>| Fm4 Close Up|<|
+ 2016-09-11 16:45:00 / 779776: STRIPPED: Title:|>|The Light Between Oceans|<|, Interpret:|>|Fm4 Close Up|<|
+ 2016-09-11 16:45:00 / 779776: Neuer Track: 27951 Title:|>|The Light Between Oceans|<|, Interpret:|>|Fm4 Close Up|<|, Count:1
+4) Spielzeit: 16:48, Tageszeit: 17:20, Spieldatum: 2016-09-11. --> Neue Playtime: 2016-09-11 16:48:00
+ 2016-09-11 16:48:00 / 779777: NEU id_playtime: 779777
+ 2016-09-11 16:48:00 / 779777: TRACK ANALYSE: Title (match-2):|>|One More Night|<|, Interpret (match-3):|>|Michael Kiwanuka|<|
+ 2016-09-11 16:48:00 / 779777: STRIPPED: Title:|>|One More Night|<|, Interpret:|>|Michael Kiwanuka|<|
+ 2016-09-11 16:48:00 / 779777: Neuer Track: 27952 Title:|>|One More Night|<|, Interpret:|>|Michael Kiwanuka|<|, Count:1
+5) Spielzeit: 16:52, Tageszeit: 17:20, Spieldatum: 2016-09-11. --> Neue Playtime: 2016-09-11 16:52:00
+ 2016-09-11 16:52:00 / 779778: NEU id_playtime: 779778
+ 2016-09-11 16:52:00 / 779778: TRACK ANALYSE: Title (match-2):|>|Pink & White|<|, Interpret (match-3):|>|Frank Ocean|<|
+ 2016-09-11 16:52:00 / 779778: STRIPPED: Title:|>|Pink & White|<|, Interpret:|>|Frank Ocean|<|
+ 2016-09-11 16:52:00 / 779778: Neuer Track: 27953 Title:|>|Pink & White|<|, Interpret:|>|Frank Ocean|<|, Count:1
+6) Spielzeit: 16:54, Tageszeit: 17:20, Spieldatum: 2016-09-11. --> Neue Playtime: 2016-09-11 16:54:00
+ 2016-09-11 16:54:00 / 779779: NEU id_playtime: 779779
+ 2016-09-11 16:54:00 / 779779: TRACK ANALYSE: Title (match-2):|>|Isto E Samba (stereotyp Rmx)|<|, Interpret (match-3):|>|Pilots On Dope|<|
+ 2016-09-11 16:54:00 / 779779: STRIPPED: Title:|>|Isto E Samba (stereotyp Rmx)|<|, Interpret:|>|Pilots On Dope|<|
+ 2016-09-11 16:54:00 / 779779: Neuer Track: 27954 Title:|>|Isto E Samba (stereotyp Rmx)|<|, Interpret:|>|Pilots On Dope|<|, Count:1
+---------------------------------------------------------------------
+Finished.
+---------------------------------------------------------------------
+#####################################################################
+Aktuelle Zeit: 11.09.2016 17:21
+Dateiname    : main
+Dateistempel : Sun, 11 Sep 2016 17:21:32 +0200
+#####################################################################
+Match-Analyse:
+---------------------------------------------------------------------
+1) matched: 16:37: <b> Stick Together</b> | <i>Eels</i>
+ 1: 16:37  31363a3337
+ 2:  Stick Together  20537469636b20546f676574686572
+ 3: Eels  45656c73
+2) matched: 16:41: <b>South Seas</b> | <i>Menage A Trois</i>
+ 1: 16:41  31363a3431
+ 2: South Seas  536f7574682053656173
+ 3: Menage A Trois  4d656e61676520412054726f6973
+3) matched: 16:45: <b> Fm4 Close Up</b> | <i>The Light Between Oceans</i>
+ 1: 16:45  31363a3435
+ 2:  Fm4 Close Up  20466d3420436c6f7365205570
+ 3: The Light Between Oceans  546865204c69676874204265747765656e204f6365616e73
+4) matched: 16:48: <b>One More Night</b> | <i>Michael Kiwanuka</i>
+ 1: 16:48  31363a3438
+ 2: One More Night  4f6e65204d6f7265204e69676874
+ 3: Michael Kiwanuka  4d69636861656c204b6977616e756b61
+5) matched: 16:52: <b>Pink & White</b> | <i>Frank Ocean</i>
+ 1: 16:52  31363a3532
+ 2: Pink & White  50696e6b2026205768697465
+ 3: Frank Ocean  4672616e6b204f6365616e
+6) matched: 16:54: <b>Isto E Samba (stereotyp Rmx)</b> | <i>Pilots On Dope</i>
+ 1: 16:54  31363a3534
+ 2: Isto E Samba (stereotyp Rmx)  4973746f20452053616d6261202873746572656f74797020526d7829
+ 3: Pilots On Dope  50696c6f7473204f6e20446f7065
+---------------------------------------------------------------------
+Playtime-Analyse:
+---------------------------------------------------------------------
+1) Spielzeit: 16:37, Tageszeit: 17:21, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:37:00.
+2) Spielzeit: 16:41, Tageszeit: 17:21, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:41:00.
+3) Spielzeit: 16:45, Tageszeit: 17:21, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:45:00.
+4) Spielzeit: 16:48, Tageszeit: 17:21, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:48:00.
+5) Spielzeit: 16:52, Tageszeit: 17:21, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:52:00.
+6) Spielzeit: 16:54, Tageszeit: 17:21, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:54:00.
+---------------------------------------------------------------------
+Finished.
+---------------------------------------------------------------------
+#####################################################################
+Aktuelle Zeit: 11.09.2016 17:23
+Dateiname    : main
+Dateistempel : Sun, 11 Sep 2016 17:23:24 +0200
+#####################################################################
+Match-Analyse:
+---------------------------------------------------------------------
+1) matched: 16:37: <b> Stick Together</b> | <i>Eels</i>
+ 1: 16:37  31363a3337
+ 2:  Stick Together  20537469636b20546f676574686572
+ 3: Eels  45656c73
+2) matched: 16:41: <b>South Seas</b> | <i>Menage A Trois</i>
+ 1: 16:41  31363a3431
+ 2: South Seas  536f7574682053656173
+ 3: Menage A Trois  4d656e61676520412054726f6973
+3) matched: 16:45: <b> Fm4 Close Up</b> | <i>The Light Between Oceans</i>
+ 1: 16:45  31363a3435
+ 2:  Fm4 Close Up  20466d3420436c6f7365205570
+ 3: The Light Between Oceans  546865204c69676874204265747765656e204f6365616e73
+4) matched: 16:48: <b>One More Night</b> | <i>Michael Kiwanuka</i>
+ 1: 16:48  31363a3438
+ 2: One More Night  4f6e65204d6f7265204e69676874
+ 3: Michael Kiwanuka  4d69636861656c204b6977616e756b61
+5) matched: 16:52: <b>Pink & White</b> | <i>Frank Ocean</i>
+ 1: 16:52  31363a3532
+ 2: Pink & White  50696e6b2026205768697465
+ 3: Frank Ocean  4672616e6b204f6365616e
+6) matched: 16:54: <b>Isto E Samba (stereotyp Rmx)</b> | <i>Pilots On Dope</i>
+ 1: 16:54  31363a3534
+ 2: Isto E Samba (stereotyp Rmx)  4973746f20452053616d6261202873746572656f74797020526d7829
+ 3: Pilots On Dope  50696c6f7473204f6e20446f7065
+---------------------------------------------------------------------
+Playtime-Analyse:
+---------------------------------------------------------------------
+1) Spielzeit: 16:37, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:37:00.
+2) Spielzeit: 16:41, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:41:00.
+3) Spielzeit: 16:45, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:45:00.
+4) Spielzeit: 16:48, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:48:00.
+5) Spielzeit: 16:52, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:52:00.
+6) Spielzeit: 16:54, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:54:00.
+---------------------------------------------------------------------
+Finished.
+---------------------------------------------------------------------
+#####################################################################
+Aktuelle Zeit: 11.09.2016 17:23
+Dateiname    : main
+Dateistempel : Sun, 11 Sep 2016 17:23:33 +0200
+#####################################################################
+Match-Analyse:
+---------------------------------------------------------------------
+1) matched: 16:37: <b> Stick Together</b> | <i>Eels</i>
+ 1: 16:37  31363a3337
+ 2:  Stick Together  20537469636b20546f676574686572
+ 3: Eels  45656c73
+2) matched: 16:41: <b>South Seas</b> | <i>Menage A Trois</i>
+ 1: 16:41  31363a3431
+ 2: South Seas  536f7574682053656173
+ 3: Menage A Trois  4d656e61676520412054726f6973
+3) matched: 16:45: <b> Fm4 Close Up</b> | <i>The Light Between Oceans</i>
+ 1: 16:45  31363a3435
+ 2:  Fm4 Close Up  20466d3420436c6f7365205570
+ 3: The Light Between Oceans  546865204c69676874204265747765656e204f6365616e73
+4) matched: 16:48: <b>One More Night</b> | <i>Michael Kiwanuka</i>
+ 1: 16:48  31363a3438
+ 2: One More Night  4f6e65204d6f7265204e69676874
+ 3: Michael Kiwanuka  4d69636861656c204b6977616e756b61
+5) matched: 16:52: <b>Pink & White</b> | <i>Frank Ocean</i>
+ 1: 16:52  31363a3532
+ 2: Pink & White  50696e6b2026205768697465
+ 3: Frank Ocean  4672616e6b204f6365616e
+6) matched: 16:54: <b>Isto E Samba (stereotyp Rmx)</b> | <i>Pilots On Dope</i>
+ 1: 16:54  31363a3534
+ 2: Isto E Samba (stereotyp Rmx)  4973746f20452053616d6261202873746572656f74797020526d7829
+ 3: Pilots On Dope  50696c6f7473204f6e20446f7065
+---------------------------------------------------------------------
+Playtime-Analyse:
+---------------------------------------------------------------------
+1) Spielzeit: 16:37, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:37:00.
+2) Spielzeit: 16:41, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:41:00.
+3) Spielzeit: 16:45, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:45:00.
+4) Spielzeit: 16:48, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:48:00.
+5) Spielzeit: 16:52, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:52:00.
+6) Spielzeit: 16:54, Tageszeit: 17:23, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:54:00.
+---------------------------------------------------------------------
+Finished.
+---------------------------------------------------------------------
+#####################################################################
+Aktuelle Zeit: 11.09.2016 17:29
+Dateiname    : main
+Dateistempel : Sun, 11 Sep 2016 17:28:53 +0200
+#####################################################################
+Match-Analyse:
+---------------------------------------------------------------------
+1) matched: 16:37: <b> Stick Together</b> | <i>Eels</i>
+ 1: 16:37  31363a3337
+ 2:  Stick Together  20537469636b20546f676574686572
+ 3: Eels  45656c73
+2) matched: 16:41: <b>South Seas</b> | <i>Menage A Trois</i>
+ 1: 16:41  31363a3431
+ 2: South Seas  536f7574682053656173
+ 3: Menage A Trois  4d656e61676520412054726f6973
+3) matched: 16:45: <b> Fm4 Close Up</b> | <i>The Light Between Oceans</i>
+ 1: 16:45  31363a3435
+ 2:  Fm4 Close Up  20466d3420436c6f7365205570
+ 3: The Light Between Oceans  546865204c69676874204265747765656e204f6365616e73
+4) matched: 16:48: <b>One More Night</b> | <i>Michael Kiwanuka</i>
+ 1: 16:48  31363a3438
+ 2: One More Night  4f6e65204d6f7265204e69676874
+ 3: Michael Kiwanuka  4d69636861656c204b6977616e756b61
+5) matched: 16:52: <b>Pink & White</b> | <i>Frank Ocean</i>
+ 1: 16:52  31363a3532
+ 2: Pink & White  50696e6b2026205768697465
+ 3: Frank Ocean  4672616e6b204f6365616e
+6) matched: 16:54: <b>Isto E Samba (stereotyp Rmx)</b> | <i>Pilots On Dope</i>
+ 1: 16:54  31363a3534
+ 2: Isto E Samba (stereotyp Rmx)  4973746f20452053616d6261202873746572656f74797020526d7829
+ 3: Pilots On Dope  50696c6f7473204f6e20446f7065
+---------------------------------------------------------------------
+Playtime-Analyse:
+---------------------------------------------------------------------
+1) Spielzeit: 16:37, Tageszeit: 17:29, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:37:00.
+2) Spielzeit: 16:41, Tageszeit: 17:29, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:41:00.
+3) Spielzeit: 16:45, Tageszeit: 17:29, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:45:00.
+4) Spielzeit: 16:48, Tageszeit: 17:29, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:48:00.
+5) Spielzeit: 16:52, Tageszeit: 17:29, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:52:00.
+6) Spielzeit: 16:54, Tageszeit: 17:29, Spieldatum: 2016-09-11. --> Alte Playtime: 2016-09-11 16:54:00.
+---------------------------------------------------------------------
+Finished.
+---------------------------------------------------------------------
+#####################################################################
+Aktuelle Zeit: 30.05.2017 21:43
+Dateiname    : 
+Dateistempel : Thu, 01 Jan 1970 01:00:00 +0100
+#####################################################################
+---------------------------------------------------------------------
+Playtime-Analyse:
+---------------------------------------------------------------------
+536807, 2017-05-30T20:52:10+02:00, Another Case, Tora
+Query insert into playtime set zeit='2017-05-30T20:52:10+02:00', idfm4=536807, track=null failed. Incorrect datetime value: '2017-05-30T20:52:10+02:00' for column 'zeit' at row 1
